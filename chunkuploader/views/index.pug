@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  <input id="fileupload" type="file" name="files[]" data-url="/upload" multiple>
+
+
+
+  
+
+   <script>$('#fileupload').fileupload({ dataType: 'json' })</script>
