@@ -15,8 +15,12 @@ gulp.task('js', function() {
 
 var jsFiles = [
 	'bower_components/jquery/dist/jquery.min.js',
-	'bower_components//blueimp-file-upload/js/vendor/jquery.ui.widget.js',
-	'bower_components/blueimp-file-upload/js/jquery.fileupload.js'
+    'bower_components//blueimp-file-upload/js/vendor/jquery.ui.widget.js',
+    'bower_components/blueimp-canvas-to-blob/js/canvas-to-blob.min.js',
+    'bower_components/blueimp-file-upload/js/cors/jquery.postmessage-transport.js',
+    'bower_components/blueimp-file-upload/js/cors/jquery.xdr-transport.js',
+    'bower_components/blueimp-file-upload/js/jquery.fileupload.js',
+    'public/js/uploader.js'
 ];
 
 gulp.src(jsFiles)
