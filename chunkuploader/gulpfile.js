@@ -1,8 +1,6 @@
 // Include Gulp
 var gulp = require('gulp');
-
-var src = 'bower_components/';
-var dest = 'public/js';
+let cleanCSS = require('gulp-clean-css');
 
 // Include plugins
 var plugins = require("gulp-load-plugins")({
@@ -14,12 +12,15 @@ var plugins = require("gulp-load-plugins")({
 gulp.task('js', function() {
 
 var jsFiles = [
-	'bower_components/jquery/dist/jquery.min.js',
+    'bower_components/jquery/dist/jquery.min.js',
     'bower_components//blueimp-file-upload/js/vendor/jquery.ui.widget.js',
     'bower_components/blueimp-canvas-to-blob/js/canvas-to-blob.min.js',
     'bower_components/blueimp-file-upload/js/cors/jquery.postmessage-transport.js',
-    'bower_components/blueimp-file-upload/js/cors/jquery.xdr-transport.js',
-    'bower_components/blueimp-file-upload/js/jquery.fileupload.js',
+    'bower_components/blueimp-file-upload/js/cors/jquery.xdr-transport.js',    
+    'bower_components/blueimp-file-upload/js/jquery.fileupload.js',         
+    'bower_components/blueimp-file-upload/js/jquery.fileupload-process.js',
+    'bower_components/blueimp-file-upload/js/jquery.fileupload-validate.js',   
+    'bower_components/blueimp-file-upload/js/jquery.iframe-transport.js',   
     'public/js/uploader.js'
 ];
 
@@ -31,17 +32,12 @@ gulp.src(jsFiles)
 
 });
 //Concat + Minify CSS
-gulp.task('css', function() {
 
-var cssFiles = ['src/css/*'];
-
-gulp.src(plugins.mainBowerFiles().concat(cssFiles))
-    .pipe(plugins.filter('*.css'))
-    .pipe(plugins.concat('main.min.css'))
-    .pipe(plugins.uglify())
-    .pipe(gulp.dest(dest + 'css'));
-
-});
+  gulp.task('css', () => {
+    return gulp.src('public/css/*.css')
+      .pipe(cleanCSS({compatibility: 'ie8'}))
+      .pipe(gulp.dest('public/css/dist'));
+  });
 
 // Default Task
 gulp.task('default', ['js','css']);
