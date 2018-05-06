@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1 Login to Your Account
+  br
+  form(action='/mylogin' enctype='multipart/form-data' method="post" id="loginform" name="loginform")
+    input(type='text', name='username', placeholder='Username')
+    input(type='password', name='pass', placeholder='Password')
+    button(type='submit' form="loginform") Click Me!
+

@@ -4,9 +4,25 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var upload = require('jquery-file-upload-middleware');
+var mangoose = require('mongoose');
+var bodyParser = require('body-parser');
+var session = require('express-session');
+var aws = require('aws-sdk');
+
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var dashboardRouter = require('./routes/dashboard');
+var loginRouter = require('./routes/mylogin');
+var signupRouter = require('./routes/mySignup');
+
+
+
+
+
+
 
 var app = express();
 // configure upload middleware
@@ -26,14 +42,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(session({secret : "Shh, its a secret!"}));
+
 app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/upload', upload.fileHandler());
 
+app.use('/mylogin', loginRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/dashboard', dashboardRouter);
+app.use('/mySignup', signupRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

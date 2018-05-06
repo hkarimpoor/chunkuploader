@@ -1,8 +1,6 @@
 extends layout
 
-block content
-  <input id="fileupload" type="file" name="files[]" data-url="/upload" multiple>
+block content 
   #container
-    img(src="" alt="Girl in a jacket")
-  script(src="js/main.js")
+    include uploader/primary_selection.pug
     

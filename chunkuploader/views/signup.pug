@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1 Create an account
+  br
+  form(action='/mySignup' method="post" id="signupform" name="signupform")
+    input(type='text', name='email', placeholder='Email')
+    input(type='text', name='username', placeholder='Username')
+    input(type='password', name='pass', placeholder='Password')
+    button(type='submit' form="signupform") signup!
+
