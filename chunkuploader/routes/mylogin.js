@@ -1,26 +1,50 @@
 var express = require('express');
 var router = express.Router();
+var oneUser = require('../models/user');
+var constr = "mongodb://hkarimpoor2003:Hk10301030@jijiwebdb-shard-00-00-n77bm.mongodb.net:27017,jijiwebdb-shard-00-01-n77bm.mongodb.net:27017,jijiwebdb-shard-00-02-n77bm.mongodb.net:27017/test?ssl=true&replicaSet=jijiwebDB-shard-0&authSource=admin";
+var mangoose = require('mongoose');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  req.session.username = "hamid";
-  req.session.pass = "123"
   res.render('login', { title: 'Express' });  
 });
 
 router.post('/', function(req, res, next) {
-   if (req.session.username == undefined || req.session.pass == undefined){
-     res.render('login', { title: 'Hello - Please Login To Your Account' });
-  }	else{  
-     if(req.session.username == "hamid" && req.session.pass == "123"){      
-       res.render('dashboard', { title: 'Express' });  
-     } else {
-       res.render('login', { title: 'Hello - Please Login To Your Account' });
-     }
-   } 
 
+    var currentUser = {
+      username : req.body.username,
+      password : req.body.pass
+    }
 
-  
+    mangoose.connect(constr, function(err){
+      if(err) {
+        console.log(err);
+      } else {                 
+        oneUser.findOne(currentUser, function(err, user){
+          if(err || !user) {
+            res.render('login', { title: 'Hello - Please Login To Your Account' });
+          } else {
+            req.session.user = user;
+            res.render('dashboard', { title: 'Express' });
+          }
+          
+        });                                    
+      }
+  }); 
+    
+
+  //  if (req.session.username == undefined || req.session.pass == undefined){
+  //    console.log('session not exist');
+  //    res.render('login', { title: 'Hello - Please Login To Your Account' });
+  // }	else{  
+  //    if(req.session.username == req.body.username && req.session.pass == req.body.pass){      
+  //      res.render('dashboard', { title: 'Express' });  
+  //    } else {
+  //     console.log(req.session);
+
+  //      res.render('login', { title: 'Hello - Please Login To Your Account' });
+  //    }
+  //  }  
 
 });
 

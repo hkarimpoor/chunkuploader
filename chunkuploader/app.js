@@ -17,6 +17,8 @@ var usersRouter = require('./routes/users');
 var dashboardRouter = require('./routes/dashboard');
 var loginRouter = require('./routes/mylogin');
 var signupRouter = require('./routes/mySignup');
+var logoutRouter = require('./routes/myLogout');
+
 
 
 
@@ -42,7 +44,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
-app.use(session({secret : "Shh, its a secret!"}));
+app.use(session({secret : "Shh, its a secret!", resave:false, saveUninitialized:true}));
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -55,6 +57,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/mySignup', signupRouter);
+app.use('/myLogout', logoutRouter);
+
 
 
 

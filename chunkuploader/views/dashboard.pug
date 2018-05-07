@@ -2,3 +2,5 @@ extends layout
 
 block content
   h1= "this is admin dashboard"
+  form(action='/myLogout'  method="get" id="logoutform" name="logoutform")    
+    button(type='submit' form="logoutform") logout
