@@ -31,21 +31,6 @@ router.post('/', function(req, res, next) {
         });                                    
       }
   }); 
-    
-
-  //  if (req.session.username == undefined || req.session.pass == undefined){
-  //    console.log('session not exist');
-  //    res.render('login', { title: 'Hello - Please Login To Your Account' });
-  // }	else{  
-  //    if(req.session.username == req.body.username && req.session.pass == req.body.pass){      
-  //      res.render('dashboard', { title: 'Express' });  
-  //    } else {
-  //     console.log(req.session);
-
-  //      res.render('login', { title: 'Hello - Please Login To Your Account' });
-  //    }
-  //  }  
-
 });
 
 module.exports = router;

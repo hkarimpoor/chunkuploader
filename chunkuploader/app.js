@@ -10,20 +10,12 @@ var session = require('express-session');
 var aws = require('aws-sdk');
 
 
-
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var dashboardRouter = require('./routes/dashboard');
 var loginRouter = require('./routes/mylogin');
 var signupRouter = require('./routes/mySignup');
 var logoutRouter = require('./routes/myLogout');
-
-
-
-
-
-
 
 
 var app = express();

@@ -7,9 +7,6 @@ var constr = "mongodb://hkarimpoor2003:Hk10301030@jijiwebdb-shard-00-00-n77bm.mo
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  req.session.destroy(function(err) {
-    // cannot access session here
-  })
   res.render('signup', { title: 'Express' });
 });
 router.post('/', function(req, res, next) {
@@ -26,9 +23,6 @@ router.post('/', function(req, res, next) {
             res.render('signup', { title: 'Express' });
           } else {                 
                   newUser.save(function(err) {
-                    // if (err) throw err;
-                    // req.session.username = req.body.username;
-                    // req.session.pass  = req.body.pass;
                     res.render('login', { title: 'Hello - Please Login To Your Account' });
 
                   });                                        
